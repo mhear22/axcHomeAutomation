@@ -7,6 +7,8 @@
 
 ## Design
 
+<img src="./axcDiagram.drawio.png">
+
 The webapp is to be developed in Typescript, running an Expressjs webserver. Tests will be handled by Jest.
 
 The webapp will have three endpoints as described below handling the forwarding of requests to the components. a stub will be used to define the downstream communication which will just log the action.
