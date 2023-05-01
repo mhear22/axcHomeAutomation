@@ -4,6 +4,8 @@ import { EventRequest } from "../models/eventRequest"
 export class ResourceService {
     constructor() { }
 
+    public static events:string[] = [] 
+
     public FetchResources(): ResourceModel[] {
         return [
             new ResourceModel("Dishwasher", ["On","Off"]),
@@ -20,6 +22,8 @@ export class ResourceService {
     }
 
     public TriggerEvent(iotEvent: EventRequest) {
-        console.log(`${iotEvent.Name} has been set to ${iotEvent.TargetState}`)
+        var message = `${iotEvent.Name} has been set to ${iotEvent.TargetState}`
+        console.log(message)
+        ResourceService.events.push(message);
     }
 }

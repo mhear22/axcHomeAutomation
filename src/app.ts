@@ -6,6 +6,8 @@ const app: Application = express()
 const port: number = 3001
 const resourceService = new ResourceService();
 var lastEvent:EventRequest|null = null;
+app.use(express.json() as any)
+
 
 app.get('/event', (req, res) => {
     var responseBody = resourceService.FetchResources()
@@ -13,14 +15,14 @@ app.get('/event', (req, res) => {
     res.send(responseBody);
 })
 
-app.post('/event', (req, res) => {
-    var body = req.body;
+app.post('/event', (request, response) => {
+    var body = request.body;
     if(!body || !body.Name || !body.TargetState) {
-        res.send(400, "Badly formed request, no body with a Name and TargetState")
+        response.send(400, "Badly formed request, no body with a Name and TargetState")
         return
     }
     else if (!resourceService.FetchForName(body.Name)?.SupportedEvents.includes(body.TargetState)??false) {
-        res.send(400, "Badly formed request, TargetState not accepted by this resource")
+        response.send(400, "Badly formed request, TargetState not accepted by this resource")
         return
     }
 
@@ -28,7 +30,7 @@ app.post('/event', (req, res) => {
 
     resourceService.TriggerEvent(body)
 
-    res.send("Received");
+    response.send("Received");
 })
 
 app.post('/undo', (req, res) => {
