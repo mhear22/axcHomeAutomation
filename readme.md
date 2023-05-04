@@ -11,7 +11,7 @@
 
 The webapp is to be developed in Typescript, running an Expressjs webserver. Tests will be handled by Jest.
 
-The webapp will have three endpoints as described below handling the forwarding of requests to the components. a stub will be used to define the downstream communication which will just log the action.
+The webapp will have three endpoints as described below handling the forwarding of requests to the proper components. a stub will be used to define the downstream communication which will just log the action. Depending on how the Remote is setup there may need to be more development (IE this is a hardware controller and its unchanging) to interface with the remote easier.
 
 ### Endpoints
 GET /event - Get the currently connected devices
@@ -54,3 +54,10 @@ Due to the assumptions page I will design with #2 in mind, but for productionizi
 ## Resources
 
 As the collection and storage are out of scope for this example they will all be hardcoded. Before productionization I would reccomend replacing this with some dynamic resource collector.
+
+## Running the project
+
+
+Firstly install the packages with `npm install` and then the project should be ready to go.
+run the command `npm run start` and it will lanch a webserver.
+If you dont have any other dev tools your browser should resolve `http://localhost:3001/event` with the configuration items.
